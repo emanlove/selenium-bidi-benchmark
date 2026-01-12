@@ -1,9 +1,14 @@
 import time
-
+import logging
 import traceback
+
 from selenium import webdriver
 
-ITERATIONS = 500
+logging.basicConfig(format='%(asctime)s.%(msecs)03d %(levelname)-8s %(message)s',
+                    level=logging.DEBUG,
+                    datefmt='%M:%S')
+
+ITERATIONS = 1
 
 chrome_options = webdriver.ChromeOptions()
 chrome_options.enable_bidi = True
@@ -64,7 +69,7 @@ document.body.innerHTML = `
     # Final Console Summary
     print("\n--- FINAL RESULTS ---")
     print(f"Classic: {classic_avg} ms/call")
-    print(f"BiDi:    {bidi_avg} ms/call%n")
+    print(f"BiDi:    {bidi_avg} ms/call")
 except Exception:
     print(traceback.format_exc())
 finally:
